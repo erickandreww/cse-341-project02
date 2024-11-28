@@ -1,0 +1,70 @@
+### Get all classes
+GET http://localhost:3000/classes
+
+### Get Class by Id
+GET http://localhost:3000/classes/671afb330d9db0a2cfc99b56
+
+### Create a Class
+POST  http://localhost:3000/classes/ HTTP/1.1
+Content-Type: application/json
+
+{
+        "class_name": "Class_H",
+        "class_floor": "third"
+}
+
+### Update Class
+PUT http://localhost:3000/classes/6747b3668bf96f5b4ddaa400 HTTP/1.1
+Content-Type: application/json
+
+{
+        "class_name": "Class_G",
+        "class_floor": "rd"
+}
+
+### Delete a Class
+DELETE http://localhost:3000/classes/6726661d7bc13179b7ce80c0
+
+
+
+### Get all students
+GET http://localhost:3000/students
+
+### Get Student by Id
+GET http://localhost:3000/students/67256bf741c04854f100a32f
+
+### Add a Student
+POST  http://localhost:3000/students/ HTTP/1.1
+Content-Type: application/json
+
+{
+        "student_firstName": "Kishibe",
+        "student_lastName": "Ryohan",
+        "student_age": 22,
+        "student_gender": "male",
+        "student_email": "kishiberyo@classe.com",
+        "class_id": "67158cbb1916506382080a26"
+}
+
+### Update Student
+PUT http://localhost:3000/students/67256bf741c04854f100a32f HTTP/1.1
+Content-Type: application/json
+
+{
+        "student_firstName": "Jonathan",
+        "student_lastName": "Joestar",
+        "student_age": 21,
+        "student_gender": "male",
+        "student_email": "jonathanJoe@classe.com",
+        "class_id": "671afb330d9db0a2cfc99b56"
+}
+
+### Delete a Student
+DELETE http://localhost:3000/students/67256d0d41c04854f100a330
+
+
+### Login
+GET http://localhost:3000/login
+
+### logout
+GET http://localhost:3000/logout
