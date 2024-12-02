@@ -5,14 +5,18 @@
     "description": "School Api",
     "version": "1.0.0"
   },
-  "host": "cse-341-project02.onrender.com",
+  "host": "localhost:3000",
   "basePath": "/",
   "schemes": [
+    "http",
     "https"
   ],
   "paths": {
     "/login": {
       "get": {
+        "tags": [
+          "Login"
+        ],
         "description": "",
         "responses": {
           "default": {
@@ -23,6 +27,9 @@
     },
     "/logout": {
       "get": {
+        "tags": [
+          "Logout"
+        ],
         "description": "",
         "responses": {
           "default": {
@@ -46,16 +53,48 @@
     },
     "/classes/": {
       "get": {
+        "tags": [
+          "Classes"
+        ],
         "description": "",
+        "produces": [
+          "application/json"
+        ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "OK"
           }
         }
       },
       "post": {
+        "tags": [
+          "Classes"
+        ],
         "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "class_name": {
+                  "example": "any"
+                },
+                "class_floor": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "401": {
             "description": "Unauthorized"
           },
@@ -67,7 +106,13 @@
     },
     "/classes/{id}": {
       "get": {
+        "tags": [
+          "Classes"
+        ],
         "description": "",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -77,22 +122,46 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "OK"
           }
         }
       },
       "put": {
+        "tags": [
+          "Classes"
+        ],
         "description": "",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "class_name": {
+                  "example": "any"
+                },
+                "class_floor": {
+                  "example": "any"
+                }
+              }
+            }
           }
         ],
         "responses": {
+          "204": {
+            "description": "No Content"
+          },
           "401": {
             "description": "Unauthorized"
           },
@@ -102,6 +171,9 @@
         }
       },
       "delete": {
+        "tags": [
+          "Classes"
+        ],
         "description": "",
         "parameters": [
           {
@@ -112,24 +184,92 @@
           }
         ],
         "responses": {
+          "204": {
+            "description": "No Content"
+          },
           "401": {
             "description": "Unauthorized"
           }
         }
       }
     },
+    "/classes/{id}/students": {
+      "get": {
+        "tags": [
+          "Classes"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/students/": {
       "get": {
+        "tags": [
+          "Students"
+        ],
         "description": "",
+        "produces": [
+          "application/json"
+        ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "OK"
           }
         }
       },
       "post": {
+        "tags": [
+          "Students"
+        ],
         "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "student_firstName": {
+                  "example": "any"
+                },
+                "student_lastName": {
+                  "example": "any"
+                },
+                "student_age": {
+                  "example": "any"
+                },
+                "student_gender": {
+                  "example": "any"
+                },
+                "student_email": {
+                  "example": "any"
+                },
+                "class_id": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "401": {
             "description": "Unauthorized"
           },
@@ -141,7 +281,13 @@
     },
     "/students/{id}": {
       "get": {
+        "tags": [
+          "Students"
+        ],
         "description": "",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -151,22 +297,58 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "OK"
           }
         }
       },
       "put": {
+        "tags": [
+          "Students"
+        ],
         "description": "",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "student_firstName": {
+                  "example": "any"
+                },
+                "student_lastName": {
+                  "example": "any"
+                },
+                "student_age": {
+                  "example": "any"
+                },
+                "student_gender": {
+                  "example": "any"
+                },
+                "student_email": {
+                  "example": "any"
+                },
+                "class_id": {
+                  "example": "any"
+                }
+              }
+            }
           }
         ],
         "responses": {
+          "204": {
+            "description": "No Content"
+          },
           "401": {
             "description": "Unauthorized"
           },
@@ -176,6 +358,9 @@
         }
       },
       "delete": {
+        "tags": [
+          "Students"
+        ],
         "description": "",
         "parameters": [
           {
@@ -186,6 +371,9 @@
           }
         ],
         "responses": {
+          "204": {
+            "description": "No Content"
+          },
           "401": {
             "description": "Unauthorized"
           }

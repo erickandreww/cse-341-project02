@@ -9,17 +9,17 @@ POST  http://localhost:3000/classes/ HTTP/1.1
 Content-Type: application/json
 
 {
-        "class_name": "Class_H",
+        "class_name": "Class_F",
         "class_floor": "third"
 }
 
 ### Update Class
-PUT http://localhost:3000/classes/6747b3668bf96f5b4ddaa400 HTTP/1.1
+PUT http://localhost:3000/classes/67158cbb1916506382080a26 HTTP/1.1
 Content-Type: application/json
 
 {
-        "class_name": "Class_G",
-        "class_floor": "rd"
+        "class_name": "Class_F",
+        "class_floor": "third"
 }
 
 ### Delete a Class
@@ -31,7 +31,7 @@ DELETE http://localhost:3000/classes/6726661d7bc13179b7ce80c0
 GET http://localhost:3000/students
 
 ### Get Student by Id
-GET http://localhost:3000/students/67256bf741c04854f100a32f
+GET http://localhost:3000/students/671afbbf7e3d0c5ee23c6848
 
 ### Add a Student
 POST  http://localhost:3000/students/ HTTP/1.1
@@ -47,7 +47,7 @@ Content-Type: application/json
 }
 
 ### Update Student
-PUT http://localhost:3000/students/67256bf741c04854f100a32f HTTP/1.1
+PUT http://localhost:3000/students/ HTTP/1.1
 Content-Type: application/json
 
 {
@@ -60,7 +60,7 @@ Content-Type: application/json
 }
 
 ### Delete a Student
-DELETE http://localhost:3000/students/67256d0d41c04854f100a330
+DELETE http://localhost:3000/students/671afbbf7e3d0c5ee23c6848
 
 
 ### Login

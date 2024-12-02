@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const utilities = require('../utilities/index')
 const studentsController = require('../controllers/students');
-const validator = require('../utilities/validation')
+const validator = require('../utilities/validation');
+const utilities = require('../utilities/index');
 const { isAuthenticated } = require('../utilities/authenticate')
 
 router.get('/', utilities.handleErrors(studentsController.getAllStudents));
@@ -16,7 +16,7 @@ router.post('/',
     utilities.handleErrors(studentsController.addStudent)
 );
 
-router.put('/:id',
+router.put('/:id', 
     validator.studentValidationRules(),
     isAuthenticated,
     validator.checkValidation,  

@@ -17,8 +17,8 @@ const getAllClasses = async (req,res) => {
 
 const getClass = async (req, res, next) => {
     //#swagger.tags=['Classes']
-    const classId = new ObjectId(req.params.id);
     try {
+        const classId = new ObjectId(req.params.id);
         const result = await mongodb.getDatabase().db().collection('class').find({_id: classId});
         result.toArray().then((classes) => {
             if (!classes[0]) {
@@ -57,49 +57,85 @@ const createClass = async (req, res, next) => {
 
 const updateClass = async (req, res, next) => {
     //#swagger.tags=['Classes'];
-    const classId = new ObjectId(req.params.id);
-    const classPath = mongodb.getDatabase().db().collection('class');
-    classPath.findOneAndUpdate(
-        {_id: classId}, 
-        {
-            $set: {
-                class_name: req.body.class_name, 
-                class_floor: req.body.class_floor,
+    try {
+        const classId = new ObjectId(req.params.id);
+        const classPath = mongodb.getDatabase().db().collection('class');
+        classPath.findOneAndUpdate(
+            {_id: classId}, 
+            {
+                $set: {
+                    class_name: req.body.class_name, 
+                    class_floor: req.body.class_floor,
+                },
             },
-        },
-        {
-            upsert: false,
-        }
-    )
-    .then((result) => {
-        if (!result) {
-            return next(createError(404, 'class does not exist'))
-        }
-        res.setHeader('Content-Type', 'application/json');
-        res.status(204).send();
-        console.log(result);
-    })
-    .catch((error) => {
+            {
+                upsert: false,
+            }
+        )
+        .then((result) => {
+            if (!result) {
+                return next(createError(404, 'class does not exist'))
+            }
+            res.setHeader('Content-Type', 'application/json');
+            res.status(204).send();
+        })
+        .catch((error) => {
+            console.log(error.message);
+            next(error);
+        });
+    } catch (error) {
         console.log(error.message);
         next(error);
-    });
+    }
 }
 
 const deleteClass = async (req, res, next) => {
     //#swagger.tags=['Classes']
-    const classId = new ObjectId(req.params.id);
-    const result = await mongodb.getDatabase().db().collection('class');
-    result.findOneAndDelete({_id: classId})
-    .then((result) => {
-        if (!result) {
-            return next(createError(404, 'class does not exist'))
-        }
-        res.status(204).json({message:"Contact Deleted"});
-    })
-    .catch((error) => {
+    try {
+        const classId = new ObjectId(req.params.id);
+        const result = await mongodb.getDatabase().db().collection('class');
+        result.findOneAndDelete({_id: classId})
+        .then((result) => {
+            if (!result) {
+                return next(createError(404, 'Class does not exist'))
+            }
+            res.status(204).json({message:"Class Deleted"});
+        })
+        .catch((error) => {
+            console.log(error.message);
+            next(error);
+        });
+    } catch (error) {
         console.log(error.message);
         next(error);
-    });
+    }
 }
 
-module.exports = { getAllClasses, getClass, createClass, updateClass, deleteClass }
+const getClassStudents = async (req, res, next) => {
+    //#swagger.tags=['Classes']
+    try {
+        const classId = new ObjectId(req.params.id);
+        const result = await mongodb.getDatabase().db().collection('class').find({_id: classId});
+        const mongoData = await result.toArray();
+        const newString = JSON.stringify(mongoData[0]._id);
+        const newId = JSON.parse(newString)
+        const studentsList = await mongodb.getDatabase().db().collection('students').find({class_id: newId});
+        studentsList.toArray().then((student) => {
+            if (!student[0]) {
+                return next(createError(404, 'Class does not have students'))
+            }
+            res.status(200).json({class: mongoData, students: student });
+        }).catch((error) => {
+            console.log(error.message);
+            next(error);
+        });
+    } catch (error) {
+        if (error.message === "Cannot read properties of undefined (reading '_id')") {
+            return next(createError(404, 'Class does not exist'));
+        }
+        console.log(error.message);
+        next(error);
+    }
+}
+
+module.exports = { getAllClasses, getClass, createClass, updateClass, deleteClass, getClassStudents }
