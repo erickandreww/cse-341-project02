@@ -3,7 +3,7 @@ const swaggerAutogen = require('swagger-autogen')();
 const doc = {
     info: {
         title: 'School Api',
-        description: 'School Api'
+        description: 'School Api project'
     }, 
     host: 'cse-341-project02.onrender.com',
     schemes: ['https']
